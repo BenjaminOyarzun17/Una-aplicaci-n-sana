@@ -5,7 +5,6 @@ import json as js
 from matplotlib import pyplot as plt
 from matplotlib.figure import Figure
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg, NavigationToolbar2Tk
-#import numpy as np
 import os 
 import datetime 
 import time
@@ -56,12 +55,7 @@ class v1:
                             height= 3, 
                             font=("Arial", 12))
         
-        #self.b4 = tk.Button(self.cajaOpciones, 
-         #              text= "", 
-          #             command = self.descargar_datos, 
-           #            width = 21, 
-            #           height= 3, 
-             #          font=("Arial", 12))
+ 
         self.cajaOpciones.place(x=80, y=50)
         self.intrucciones.grid(sticky = "N")
         self.b1.grid()
@@ -380,12 +374,7 @@ class v1:
             return rondeo
         self.ClaseEnHoras = minutosAHORA(self.tiempoSemanalClaseTotalSuma)    
         self.EstudioEnHoras = minutosAHORA(self.tiempoSemanalEstudioTotalSuma)
-        self.DescansoEnHoras = minutosAHORA(self.tiempoSemanalDescansoTotalSuma) 
-        print("en horas: "+ str(self.DescansoEnHoras ))
-        print(str(self.tiempoSemanalEstudioTotalSumaPromedioPorDia))
-        print(str(self.tiempoSemanalClaseTotalSumaPromedioPorDia))
-        print(str(self.tiempoSemanalDescansoTotalSumaPromedioPorDia))
-        
+        self.DescansoEnHoras = minutosAHORA(self.tiempoSemanalDescansoTotalSuma)    
         
         
         while len(self.actividadesDeEstudio) > len(self.tiemposEstudio):
@@ -493,9 +482,7 @@ class v1:
         self.LabelStat5_1.grid(row = 4,column = 1)
         self.LabelStat6_1.grid(row = 5,column = 1)
 
-        print(self.setEstudio)
-        print(self.setClase)      
-        print(self.setDescanso)    
+        
     def vGrafSemanaA(self):
         def showActivity():
             json_data = []
@@ -509,13 +496,10 @@ class v1:
             for elemento in json_data:
                 if elemento["Tipo"] == "Estudio":
                     self.EstudioIngresado = elemento["Actividades"]
-                    print(self.EstudioIngresado)
                 if elemento["Tipo"] == "Clase":
                     self.ClaseIngresado = elemento["Actividades"]
-                    print(self.ClaseIngresado)
                 if elemento["Tipo"] == "Descanso":
                     self.DescansoIngresado = elemento["Actividades"]
-                    print(self.DescansoIngresado)
             return self.EstudioIngresado, self.ClaseIngresado,self.DescansoIngresado
         showActivity()
         self.grafSemanaA = tk.Toplevel()
@@ -535,9 +519,6 @@ class v1:
             self.json_line = js.loads(self.line)
             self.json_data.append(self.json_line)
         self.file.close()
-        
-        
-        #conjuntos
         self.setEstudio = []
         self.setClase = []
         self.setDescanso = []
@@ -594,10 +575,7 @@ class v1:
         for descanso in setsDescanso:
             setsDescanso[descanso] = sum(setsDescanso[descanso])
        
-        print("sumas:")
-        print(setsDescanso)
-        print(setsClase)
-        print(setsEstudio)
+        
         self.descansos= self.DescansoIngresado        
         self.tiemposDescanso = []
         self.tiemposEstudio = []
@@ -608,9 +586,7 @@ class v1:
             self.tiemposEstudio.append(setsEstudio[estudio])
         for clase in setsClase:
             self.tiemposClase.append(setsClase[clase])
-        print(self.tiemposDescanso)
-        print(self.tiemposClase)
-        print(self.tiemposEstudio)
+        
         self.tiempoPorTipo = []
         self.tiempoSemanalDescansoTotalSuma = sum(self.tiemposDescanso)
         self.tiempoSemanalEstudioTotalSuma = sum(self.tiemposEstudio)
@@ -636,14 +612,7 @@ class v1:
         self.ClaseEnHoras = minutosAHORA(self.tiempoSemanalClaseTotalSuma)    
         self.EstudioEnHoras = minutosAHORA(self.tiempoSemanalEstudioTotalSuma)
         self.DescansoEnHoras = minutosAHORA(self.tiempoSemanalDescansoTotalSuma) 
-        print("en horas: "+ str(self.DescansoEnHoras ))
-        print(str(self.tiempoSemanalEstudioTotalSumaPromedioPorDia))
-        print(str(self.tiempoSemanalClaseTotalSumaPromedioPorDia))
-        print(str(self.tiempoSemanalDescansoTotalSumaPromedioPorDia))
-        
-        
-        
-        
+         
         self.llbTTAL = tk.Label(self.grafSemanaA,
                                 text = "Tiempo utilizado en cada estudio de la semana pasada",
                                 font=("Arial", 20) )
@@ -684,7 +653,6 @@ class v1:
         self.canvas.get_tk_widget().grid(row=1, column = 1)
         self.llbTTALLLL.grid(row=0, column = 1)
         
-        print("El promedio de estudio semanal es "+ str(self.tiempoSemanalEstudioTotalSumaPromedioPorDia))
 
         self.CanvasTabla = tk.Canvas(self.grafSemanaA)
         self.LabelStat1 = tk.Label(self.CanvasTabla,
@@ -744,7 +712,6 @@ class v1:
         print(self.setDescanso)    
     def vGrafDia(self):
         def GraphIt():
-             #conjuntos
             self.setEstudio = []
             self.setClase = []
             self.setDescanso = []
@@ -753,9 +720,7 @@ class v1:
              
             self.currentDT = datetime.datetime.now()
             self.diaSemana = self.currentDT.strftime("%A")
-            print(self.diaSemana)
-            #self.mes = self.currentDT.strftime("%B")
-            print(self.mes)
+           
             
             self.tiempoDiarioBruto = []
             self.defnirAct= []
@@ -807,10 +772,7 @@ class v1:
                                                 actividad["Tiempo"]["Duracion"]])
                         self.setTodos.append([actividad["Tipo Espec\u00edfico"]["descanso:"],
                                                 actividad["Tiempo"]["Duracion"]])                        
-            print("actividades registradas:")
-            print(self.defnirAct)
-            print("el bruto:")
-            print(self.tiempoDiarioBruto)
+            
             self.tiempoDiarioBrutoEstudio
             self.tiempoDiarioBrutoClase
             self.tiempoDiarioBrutoDescanso
@@ -846,11 +808,7 @@ class v1:
                 for key in conjuntoDescansoKey:
                     if par[0] == key:
                         conjuntoDescanso[key].append(par[1])
-            print("antes de sumar repetidos:")
-            print(conjuntoEstudio)
-            print(conjuntoClase)
-            print(conjuntoDescanso)
-            print(conjuntoTodos)
+           
             for key in conjuntoTodos:
                 conjuntoTodos[key] = sum(conjuntoTodos[key])
             for key in conjuntoEstudio:
@@ -878,14 +836,7 @@ class v1:
             tiempoTipoEspecífico.append(tiempoDescansoSuma)
             tiempoEstudioSuma = sum(TiempoEstudio)
             tiempoTipoEspecífico.append(tiempoEstudioSuma)
-            
-            
-            
-            print("luego de sumar repetidos.")
-            print(conjuntoEstudio)
-            print(conjuntoClase)
-            print(conjuntoDescanso)
-            
+                       
             tiposEspecíficos = ["Clase","Descaso","Estudio"]
             
             self.llbTTAL = tk.Label(self.vGrafDia, text = "Tiempo utilizado en cada tipo de actividad del "+ self.fecha+" de " +self.mes+"." )
@@ -932,7 +883,6 @@ class v1:
         def EntryDiaGet():
             global fecha
             global mes
-            #self.fecha = tk.IntVar()
             self.fecha = self.EntryDia.get()
             self.mes = self.EntryMes.get()
             print("la fecha es "+self.fecha)
@@ -940,9 +890,6 @@ class v1:
             GraphIt()
         
             return self.fecha, self.mes
-        
-        
-       # self.fecha = self.currentDT.strftime("%d")
         
         self.vGrafDia = tk.Toplevel()
         self.vGrafDia.geometry("1500x500")
@@ -971,55 +918,7 @@ class v1:
         self.lblMes.grid(column = 0, row = 2)
         self.EntryMes.grid(column = 0, row = 3)
         self.btnEntry.grid(column = 0, row = 4)   
-
-        #obtiene fecha (numero de dia del mes) no hay que cambiarle el nombre a
-        # la variable, pero hay que hacer que se pueda ingresar en el lado derecho
-        #el numero de dia.
-        
-      
-         
-        
-        
-        
-        
-        """
-        no los saco pq podrian ser utiles
-        plt.figure(1)
-        plt.bar(self.defnirAct, self.tiempoDiarioBruto, color="b", label="actividades registradas")
-        plt.legend()
-        plt.title("Tiempo utilizado en cada actividad del "+ self.fecha+" de " +self.mes+"." )
-        plt.xlabel("Actividad")
-        plt.ylabel("Tiempo")
-        plt.figure(2)
-        plt.bar(self.actEstudio, self.tiempoDiarioBrutoEstudio, color = "k", label= "estudio registrado")
-        plt.legend()
-        plt.title("Tiempo utilizado en cada estudio del "+ self.fecha+" de " +self.mes+"." )
-        plt.xlabel("Asignaturas")
-        plt.ylabel("Tiempo")
-        plt.figure(3)
-        plt.bar(self.actClase, self.tiempoDiarioBrutoClase, color = "r", label= "clases registradas")
-        plt.legend()
-        plt.title("Tiempo utilizado en cada clase del "+ self.fecha+" de " +self.mes+"." )
-        plt.xlabel("Clase")
-        plt.ylabel("Tiempo")
-        plt.figure(4)
-        
-        plt.bar(self.actDescanso, self.tiempoDiarioBrutoDescanso, color = "g", label = "descanso registrado")
-        plt.legend()
-        plt.title("Tiempo utilizado en cada descanso del "+ self.fecha+" de " + self.mes+"." )
-        plt.xlabel("Tipo Descanso")
-        plt.ylabel("Tiempo")
-        plt.figure(5)
-        plt.bar(self.TuplaTipoActividad, self.TuplaTiempos, color = "c", label = "tiempo en cada tipo de actividad")
-        plt.title("Tiempo utilizado en cada tipo de actividad del "+ self.fecha+" de " +self.mes+"." )
-        plt.xlabel("Tipo Actividad")
-        plt.ylabel("Tiempo")
-        plt.show()
-        """
-           
-        
-
-        
+     
     def vtimer(self):
         def showActivity():
             json_data = []
@@ -1046,7 +945,6 @@ class v1:
         self.asignaturasEstudio = self.EstudioIngresado
         self.vt = tk.Toplevel()
         self.vt.geometry("800x350")
-        #global LblActividad 
         
         self.LblActividad = tk.Label(self.vt, 
                                      text="actividad: ",
