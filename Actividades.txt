@@ -1,0 +1,3 @@
+{"Tipo": "Estudio", "Actividades": ["CAS","MONO","TdC","Bio","Gesch","Eng", "Deu", "Mat", "Lit","FCIU", "CSCIU", "DPTE", "CHN", "VOC", "EXP", "HUN", "BUN", "Filo"]}
+{"Tipo": "Clase", "Actividades": ["CAS","TdC","Bio","Gesch","Eng", "Deu", "Mat", "Lit","FCIU", "CSCIU", "DPTE", "CHN"]}
+{"Tipo": "Descanso", "Actividades": ["leyendo", "TV", "fam", "guit", "amig", "pausa", "ayud"]}
